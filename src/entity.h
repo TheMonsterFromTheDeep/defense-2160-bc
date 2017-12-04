@@ -23,6 +23,7 @@ typedef struct entity {
 
 extern entity *ent_new(void);
 extern void ent_destroy(entity*);
+extern void ent_cleanup(void);
 
 typedef struct {
     entity *(*next)(void*);

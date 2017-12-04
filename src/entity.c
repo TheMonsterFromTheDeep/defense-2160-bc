@@ -2,6 +2,7 @@
 #include "new.h"
 
 #include <stdarg.h>
+#include <math.h>
 
 zlist_of(entity*) entity_pool;
 

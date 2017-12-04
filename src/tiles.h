@@ -12,6 +12,9 @@ extern sound* sound_clicking;
 extern sound* sound_hit;
 extern sound* sound_cannon;
 extern sound* sound_explosion;
+extern sound* sound_wave_start;
+extern sound* sound_clock;
+extern sound* sound_spear;
 
 enum tags {
     ENEMY,
@@ -28,6 +31,7 @@ entity *create_spear_launcher(vec);
 entity *create_tower_selector();
 entity *create_price();
 entity *create_next_wave();
+entity *create_money_visual();
 
 entity *create_land(float);
 

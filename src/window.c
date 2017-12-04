@@ -36,6 +36,8 @@ vec screen_cursor() {
     return result;
 }
 
+void set_icon(GLFWwindow*);
+
 GLFWwindow *window_init(window_info *info) {
     GLFWwindow* window;
 
@@ -55,8 +57,11 @@ GLFWwindow *window_init(window_info *info) {
         glfwTerminate();
         return NULL;
     }
+	
+	set_icon(window);
 
     glfwSetFramebufferSizeCallback(window, resize_callback);
+	
     
     /* Make the window's context current */
     glfwMakeContextCurrent(window);

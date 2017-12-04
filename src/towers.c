@@ -11,7 +11,7 @@ entity *create_core() {
     
     add_component(e, c_new(core));
     
-    add_component(e, get_renderer(&sprite_core));
+    add_component(e, get_animator(&sprite_core, 20));
     
     add_component(e, get_health(200));
     add_component(e, c_new(tower_health));
@@ -29,7 +29,7 @@ declare_tick(tower_grace, {
 	}
 })
 declare_head(tower_grace);
-tower_grace *get_grace(int cost) { tower_grace* tg = c_new(tower_grace); tg->ticks = 50; tg->cost = cost; return tg; }
+tower_grace *get_grace(int cost) { tower_grace* tg = c_new(tower_grace); tg->ticks = 50 * 2; tg->cost = cost; return tg; }
 
 #define SHIELD_PRICE 75
 #define BOW_PRICE 100

@@ -15,6 +15,9 @@ sound *sound_clicking;
 sound *sound_hit;
 sound *sound_cannon;
 sound *sound_explosion;
+sound *sound_wave_start;
+sound *sound_clock;
+sound *sound_spear;
 
 mode_k mode = MENU;
 mode_k switch_to = NONE;
@@ -179,6 +182,9 @@ void init() {
 	sound_hit = get_sound("snd/hit.wav");
 	sound_cannon = get_sound("snd/cannon.wav");
 	sound_explosion = get_sound("snd/explosion.wav");
+	sound_wave_start = get_sound("snd/wave_start.wav");
+	sound_clock = get_sound("snd/clock.wav");
+	sound_spear = get_sound("snd/spear.wav");
 	
 	camera = joystick_from(key_axis('A', 'D'), key_axis('S', 'W'));
 	

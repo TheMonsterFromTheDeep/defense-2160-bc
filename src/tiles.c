@@ -128,6 +128,8 @@ int spider_delay = 0, snake_delay = 0, bat_delay = 0;
 int spider_ticks = 0, snake_ticks = 0, bat_ticks = 0;
 int which_wave = 0;
 
+int last_sec = 9;
+
 static int next_wave_ticks = 50 * 9;
 static int should_give_money = 0;
 
@@ -139,6 +141,8 @@ void init_game_values() {
 	spider_delay = 0, snake_delay = 0, bat_delay = 0;
 	spider_ticks = 0, snake_ticks = 0, bat_ticks = 0;
 	which_wave = 0;
+	
+	last_sec = 9;
 
 	next_wave_ticks = 50 * 9;
 	should_give_money = 0;
@@ -212,8 +216,11 @@ void enemy_spawn() {
 		next_wave_ticks = (50 * 9) - which_wave;
 		
 		should_give_money = 1;
+		
+		play_sound(sound_wave_start);
 	}
 }
+
 
 static int next_wave_sec;
 
@@ -221,8 +228,16 @@ declare_body(next_wave_hide, { })
 
 declare_draw(next_wave_hide, { })
 declare_tick(next_wave_hide, {
-	next_wave_sec = next_wave_ticks / 50;
-	parent->visible = !(spider_quota || snake_quota || bat_quota);
+	int active = !(spider_quota || snake_quota || bat_quota);
+	
+	if(active) {
+		next_wave_sec = next_wave_ticks / 50;
+		if(next_wave_sec != last_sec) {
+			play_sound(sound_clock);
+		}
+		last_sec = next_wave_sec;
+	}
+	parent->visible = active;
 })
 
 declare_head(next_wave_hide);
