@@ -4,6 +4,7 @@ declare_body(move_bat, {
     int cooldown;
     int on_wall;
 	int on_floor;
+	int is_smart;
 })
 
 declare_draw(move_bat, { })
@@ -39,7 +40,7 @@ declare_tick(move_bat, {
 		}
 	}
 	else {
-		entity *wall = get_wall(parent, 1);
+		entity *wall = get_wall(parent, self->is_smart);
 		if(wall) {
 			if(!self->on_wall) {
 				set_animator(sr, &sprite_bat_side_bash, 4);
@@ -73,6 +74,7 @@ entity *create_bat() {
     
     move_bat *mv = c_new(move_bat);
     mv->cooldown = 20;
+	mv->is_smart = rand() % 2;
     add_component(e, mv);
     
     add_component(e, get_enemy_health());
@@ -229,7 +231,7 @@ declare_head(move_spear_bat);
 
 entity *create_spear_bat() {
     entity *e = ent_new();
-    e->position = vxy(500, 30);
+    e->position = vxy(500, get_random_y());
     e->tag = ENEMY;
     e->layer = 1;
     

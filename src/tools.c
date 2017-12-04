@@ -72,7 +72,7 @@ declare_tick(number_renderer, { })
 declare_head(number_renderer)
 
 float get_random_y() {
-	float y = rand() % 150;
+	float y = rand() % 121;
 	y = round(y / 30) * 30;
 	return y;
 }

@@ -34,7 +34,7 @@ tower_grace *get_grace(int cost) { tower_grace* tg = c_new(tower_grace); tg->tic
 #define SHIELD_PRICE 75
 #define BOW_PRICE 100
 #define BOMB_PRICE 250
-#define SMASH_PRICE 175
+#define SMASH_PRICE 130
 #define SPEAR_PRICE 125
 
 int prices[TOWER_COUNT] = {
@@ -152,7 +152,7 @@ declare_tick(smasher_flag, {
     float x = parent->position.x, y = parent->position.y;
     
     for_ent(e, ent_all(
-            within_x_bounds(x, x + 30),
+            within_x_bounds(x, x + 25),
             within_y_bounds(y, y + 10),
             tagged(ENEMY)
         ), {

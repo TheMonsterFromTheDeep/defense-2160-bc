@@ -54,4 +54,4 @@ install : $(BIN)
 	cp $(BIN) $(INSTALL_PATH)/bin
     
 windows : $(OBJS:%=$(BUILD_DIR)/%)
-	$(CC) $^ -o shader-test-windows.exe $(CFLAGS) -mwindows
+	$(CC) $^ build/shoehorn_sdl.o -o shader-test-windows.exe $(CFLAGS) -mwindows
