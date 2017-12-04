@@ -1,0 +1,6 @@
+sprite:
+	cd sprite
+	jot diffuse $(SPRS)
+	cp sprite/images_diffuse.h src/images_diffuse.h
+	cp sprite/images_diffuse.c src/images_diffuse.c
+	cd ..
