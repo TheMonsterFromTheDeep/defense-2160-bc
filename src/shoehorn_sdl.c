@@ -17,7 +17,7 @@ void set_music(const char* path) {
 	if(music) { Mix_FreeMusic(music); music = NULL; }
 	music = Mix_LoadMUS(path);
 	if(music) {
-		//Mix_PlayMusic(music, -1);
+		Mix_PlayMusic(music, -1);
 	}
 }
 
@@ -32,7 +32,7 @@ void sound_init() {
         return;
     }
     
-    //should_play = 1;
+    should_play = 1;
 }
 
 sound *get_sound(const char* path) {

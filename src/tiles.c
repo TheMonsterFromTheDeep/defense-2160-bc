@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <math.h>
 
-int total_money = 500;
+int total_money = 700;
 
-zlist_of(enemy_spawner) spider_types;
-zlist_of(enemy_spawner) snake_types;
-zlist_of(enemy_spawner) bat_types;
+zlist_of(enemy_spawner) spider_types = NULL;
+zlist_of(enemy_spawner) snake_types = NULL;
+zlist_of(enemy_spawner) bat_types = NULL;
 
 declare_draw(hold_upgrade, { })
 declare_tick(hold_upgrade, { })
@@ -95,12 +95,15 @@ entity *create_money_visual() {
 }
 
 void init_spawns() {
+	if(spider_types) zfree(spider_types);
     zlist_init(spider_types, 1);
     spider_types[0] = &create_spider;
 	
+	if(snake_types) zfree(snake_types);
 	zlist_init(snake_types, 1);
     snake_types[0] = &create_snake;
 	
+	if(snake_types) zfree(bat_types);
 	zlist_init(bat_types, 1);
 	bat_types[0] = &create_bat;
 }
@@ -127,6 +130,19 @@ int which_wave = 0;
 
 static int next_wave_ticks = 50 * 9;
 static int should_give_money = 0;
+
+void init_game_values() {
+	total_money = 700;
+	current_tower_selected = 0;
+
+	spider_quota = 0, snake_quota = 0, bat_quota = 0;
+	spider_delay = 0, snake_delay = 0, bat_delay = 0;
+	spider_ticks = 0, snake_ticks = 0, bat_ticks = 0;
+	which_wave = 0;
+
+	next_wave_ticks = 50 * 9;
+	should_give_money = 0;
+}
 
 int get_ticks(int delay) {
 	return delay - 5 + (rand() % 11);
@@ -257,6 +273,7 @@ declare_tick(selector_control, {
     mouse = vsub(mouse, vxy(15, 15));
     mouse = vsnap(mouse, 30);
     if(mouse.y < 0) mouse.y = 0;
+	if(mouse.y > 120) mouse.y = 120;
     if(mouse.x < 0) mouse.x = 0;
     if(mouse.x > 300) mouse.x = 300;
     parent->position = mouse;

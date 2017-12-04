@@ -93,6 +93,8 @@ declare_body(hold_upgrade, {
 	enemy_spawner bat;
 })
 
+hold_upgrade *upgrader(enemy_spawner, enemy_spawner, enemy_spawner);
+
 typedef struct {
 	int spider_quota;
 	int spider_rate;
@@ -102,7 +104,9 @@ typedef struct {
 	int bat_rate;
 } wave;
 
-#define WAVE_COUNT 1
+void init_game_values();
+
+#define WAVE_COUNT 34
 extern wave waves[WAVE_COUNT];
 
 #endif

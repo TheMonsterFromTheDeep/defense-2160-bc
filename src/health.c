@@ -20,7 +20,9 @@ declare_tick(health, {
         }
 		
 		if(parent->tag == ENEMY) {
-			total_money += 1 + rand() % 5;
+			int base = (int)(self->total / 10);
+			if(base < 2) base = 2;
+			total_money += base + rand() % 5;
 		}
     }
     return self->amount <= 0;

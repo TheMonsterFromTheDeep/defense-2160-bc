@@ -136,7 +136,10 @@ void init_help() {
 }
 
 void init_game() {
-	camera_position(vxy(0, -3));
+	init_spawns();
+	init_game_values();
+	
+	camera_position(vxy(0, -2));
     
     set_background(rgb(0.7f, 0.9f, 0.8f));
     
@@ -157,11 +160,17 @@ void init_game() {
 	create_tower_selector();
 	create_money_visual();
 	create_price();
+	
+	create_spear_launcher(vxy(0, 30));
+	create_spear_launcher(vxy(0, 60));
+	create_spear_launcher(vxy(0, 90));
+	create_spear_launcher(vxy(0, 120));
+	
+	total_money = 700;
 }
 
 void init() {
 	sound_init();
-	init_spawns();
 	set_music("snd/music.wav");
 	
 	sound_build = get_sound("snd/build.wav");
@@ -206,7 +215,7 @@ void loop() {
 	switch(mode) {
 		case GAME:
 			camera_shift(vmul(joystick_value(camera), 10));
-			clamp_camera(0, 500 - 210, -3, 20);
+			clamp_camera(0, 500 - 210, -2, 20);
 		
 			enemy_spawn();
 			

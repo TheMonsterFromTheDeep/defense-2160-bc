@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <pthread.h>
+#include <stdlib.h>
 
 #include "loops.h"
 #include "window.h"
@@ -67,6 +68,8 @@ void game_begin(const char* title, int viewx, int viewy, float scale) {
     
     pthread_t tick_thread_id;
     pthread_create(&tick_thread_id, NULL, tick_thread, NULL);
+	
+	srand(time(NULL));
     
     for(;;) {
         pthread_mutex_lock  (&lock);

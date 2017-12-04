@@ -31,11 +31,11 @@ declare_tick(tower_grace, {
 declare_head(tower_grace);
 tower_grace *get_grace(int cost) { tower_grace* tg = c_new(tower_grace); tg->ticks = 50; tg->cost = cost; return tg; }
 
-#define SHIELD_PRICE 50
+#define SHIELD_PRICE 75
 #define BOW_PRICE 100
-#define BOMB_PRICE 200
-#define SMASH_PRICE 300
-#define SPEAR_PRICE 150
+#define BOMB_PRICE 250
+#define SMASH_PRICE 175
+#define SPEAR_PRICE 125
 
 int prices[TOWER_COUNT] = {
 	SHIELD_PRICE,
@@ -63,6 +63,7 @@ int full_refund(entity *e) {
 	if(tg) {
 		return tg->ticks;
 	}
+	return 0;
 }
 
 entity *create_shield(vec pos) {
@@ -227,11 +228,9 @@ entity *create_spear_launcher(vec pos) {
     e->position = pos;
     e->tag = TOWER;
     
-    
-    
     add_component(e, get_health(120));
     add_component(e, c_new(tower_health));
-    //add_component(e, upgrader(&create_bow_spider, &create_bow_snake, &create_bow_bat));
+    add_component(e, upgrader(&create_spear_spider, &create_spear_snake, &create_spear_bat));
     add_component(e, get_healer(0.01f));
 	
 	spear_launcher *sl = c_new(spear_launcher);
